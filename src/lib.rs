@@ -1,4 +1,4 @@
-enum Polynom {
+pub enum Polynom {
     Empty,
     Full {
         coefficient: f64,
@@ -36,11 +36,11 @@ impl std::fmt::Display for Polynom {
 }
 
 impl Polynom {
-    fn new() -> Polynom {
+    pub fn new() -> Polynom {
         Polynom::Empty
     }
 
-    fn add_term(self, coefficient: f64, exponent: i32) -> Polynom {
+    pub fn add_term(self, coefficient: f64, exponent: i32) -> Polynom {
         match self {
             Polynom::Empty => Polynom::Full {
                 coefficient,
@@ -59,7 +59,7 @@ impl Polynom {
         }
     }
 
-    fn eval(&self, x: f64) -> f64 {
+    pub fn eval(&self, x: f64) -> f64 {
         match self {
             Polynom::Empty => 0.,
             Polynom::Full {
@@ -70,7 +70,7 @@ impl Polynom {
         }
     }
 
-    fn differentiate(&self) -> Polynom {
+    pub fn differentiate(&self) -> Polynom {
         match self {
             Polynom::Empty => Polynom::Empty,
             Polynom::Full {
@@ -92,7 +92,7 @@ impl Polynom {
         }
     }
 
-    fn find_root(&self, guess: f64) -> f64 {
+    pub fn find_root(&self, guess: f64) -> f64 {
         fn find_root_impl(poly: &Polynom, derivative: &Polynom, guess: f64) -> f64 {
             // println!("find_root_impl({}, {}, {})", poly, derivative, guess);
             let next_guess = guess - poly.eval(guess) / derivative.eval(guess);
