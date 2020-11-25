@@ -96,7 +96,7 @@ impl Polynom {
         fn find_root_impl(poly: &Polynom, derivative: &Polynom, guess: f64) -> f64 {
             // println!("find_root_impl({}, {}, {})", poly, derivative, guess);
             let next_guess = guess - poly.eval(guess) / derivative.eval(guess);
-            if (next_guess - guess).abs() < 0.000001 {
+            if (next_guess - guess).abs() < 0.001 {
                 next_guess
             } else {
                 find_root_impl(poly, derivative, next_guess)
