@@ -112,7 +112,7 @@ mod tests {
     use super::*;
     use assert_approx_eq::assert_approx_eq;
 
-    const PRECISION: f64 = 0.000001;
+    const PRECISION: f64 = 0.0001;
 
     #[test]
     fn print_empty_polynom() {
@@ -261,10 +261,8 @@ mod tests {
         assert_approx_eq!(actual, -1.5, PRECISION);
 
         // when:
-        let actual = under_test.find_root(2.5);
+        let actual = under_test.find_root(-2.5);
         // then:
         assert_approx_eq!(actual, -2.5943, PRECISION);
-        // TEST IS WRONG!!!
-        // assert_approx_eq!(actual, -1.5, PRECISION);
     }
 }
