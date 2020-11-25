@@ -9,29 +9,27 @@ pub enum Polynom {
 
 impl std::fmt::Display for Polynom {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Polynom::Empty => Ok(()),
-            Polynom::Full {
-                coefficient,
-                exponent,
-                next,
-            } => {
-                write!(f, "{}", coefficient)?;
-                match exponent {
-                    0 => {}
-                    1 => write!(f, "x")?,
-                    _ => write!(f, "x^{}", exponent)?,
+        if let Polynom::Full {
+            coefficient,
+            exponent,
+            next,
+        } = self
+        {
+            write!(f, "{}", coefficient)?;
+            match exponent {
+                0 => {}
+                1 => write!(f, "x")?,
+                _ => write!(f, "x^{}", exponent)?,
+            }
+            if let Polynom::Full { coefficient, .. } = **next {
+                if coefficient < 0. {
+                    write!(f, " {}", next)?;
+                } else {
+                    write!(f, " + {}", next)?;
                 }
-                if let Polynom::Full { coefficient, .. } = **next {
-                    if coefficient < 0. {
-                        write!(f, " {}", next)?;
-                    } else {
-                        write!(f, " + {}", next)?;
-                    }
-                }
-                Ok(())
             }
         }
+        Ok(())
     }
 }
 
